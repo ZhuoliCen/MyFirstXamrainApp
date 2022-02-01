@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyFirstXamrainApp.Views.AboutPage"
+             xmlns:vm="clr-namespace:MyFirstXamrainApp.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label 
+                BackgroundColor="Yellow"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="Please enter your username"
+                FontAttributes="Bold"
+                FontSize="Large"
+                TextColor="Blue"
+                TextTransform="Uppercase"/>
+                <Entry Text="qiaoqiaoshizhuzhu"/>
+                <Label Text="Please choose your pet"
+                   FontAttributes="Bold"
+                FontSize="Large"
+                TextColor="Blue"/>
+                <Picker>
+                    <Picker.Items>
+                        <x:String>cat</x:String>
+                        <x:String>dog</x:String>
+                        <x:String>pig</x:String>
+                    </Picker.Items>
+                </Picker>
+
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="red"/>
+                    <BoxView 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="red"/>
+                    <BoxView 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    BackgroundColor="red"/>
+                    <BoxView 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2"
+                    BackgroundColor="blue"/>
+                    <!--<BoxView 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="red"/>-->
+                    <BoxView 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    BackgroundColor="red"/>
+                    <!--<BoxView 
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="red"/>
+                <BoxView 
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    BackgroundColor="red"/>-->
+                    <BoxView 
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    BackgroundColor="red"/>
+                </Grid>
+
+                <StackLayout>
+                    <Grid>
+                        <Label Text="你有没有话要说？" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                        <CheckBox Grid.Column="1" HorizontalOptions="End" x:Name="talking" IsChecked="False"/>
+                        <Entry Grid.Row="1" Grid.ColumnSpan="2" IsVisible="False">
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                 Binding="{Binding Source={x:Reference talking}, Path=IsChecked}"
+                                 Value="True">
+                                    <Setter Property="IsVisible" Value="True"/>
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                    </Grid>
+                </StackLayout>
+
+                <Entry x:Name="email" Placeholder="Username"/>
+                <Entry x:Name="phone" IsPassword="True" Placeholder="Password"/>
+
+                <Button TextColor="Blue" Text="你是猪猪" IsEnabled="False">
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference email},
+                                   Path=Text}"
+                               Value="23" />
+                                <BindingCondition Binding="{Binding Source={x:Reference phone},
+                                   Path=Text}"
+                               Value="1234" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="Text" Value="Enter" />
+                            <!-- multiple Setter elements are allowed -->
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
